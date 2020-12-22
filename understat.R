@@ -6,7 +6,7 @@ library(here) ##for saving output - more stable than set_wd()
 leagues<-get_leagues_meta()
 
 ##remove RFPL to leave top 5 European leagues
-leagues=leagues%>%
+leagues<-leagues%>%
   filter(!league_name == "RFPL")
 
 ##pull team match data
