@@ -1,6 +1,6 @@
 library(tidyverse) 
 library(understatr)
-library(here) ##for saving output - more stable than "set_wd()"
+library(here) ##for saving output - more stable than set_wd()
 
 ##pull available leagues
 leagues<-get_leagues_meta()
