@@ -6,9 +6,9 @@ library(here)
 ##download yearly .csv files in https://github.com/Markjwilkins/Understat and add to local folder
 
 ##select file path where understat files are saved e.g:
-file_path<-"understat_file_folder"
+file_path<-"understat_shot_data"
 
-##bind all .csv files and create uniforn column names
+##bind all .csv files and uniforn column names
 all_shots <- list.files(path = file_path,     
                        pattern = "*.csv", full.names = TRUE) %>% 
   lapply(read_csv) %>%                                            
@@ -17,7 +17,7 @@ all_shots <- list.files(path = file_path,
 
 ##filter player and remove penalties
 player_plot<-all_shots %>% 
-  filter(player=="Pierre-Emerick Aubameyang",
+  filter(player=="Jamie Vardy",
          !situation=="Penalty") %>% 
   mutate(outcome = ifelse(result=="Goal", "Goal", "No Goal")) %>% 
   mutate(league_year = glue::glue("{year}: {team_name}"))
@@ -54,10 +54,10 @@ p1<-ggplot(player_plot) +
   labs(title = paste(player_plot$player),
        subtitle = paste(min(player_plot$year), "-", max(player_plot$year), "// All Penalties Removed"),
        size = "Expected Goals") +
-  geom_label(data = player_summary_1, size=3, fill = primary_col, aes(x=65, y=20, label = paste0("Total Shots: ", total_shots)))+
-  geom_label(data = player_summary_1, size=3, fill = primary_col, aes(x=58.5, y=20, label = paste0("Total Goals: ", total_goals)))+
-  geom_label(data = player_summary_1, size=3, fill = primary_col, aes(x=65, y=80, label = paste0("Total xG: ", total_xg)))+
-  geom_label(data = player_summary_1, size=3, fill = primary_col, aes(x=58.5, y=80, label = paste0("xG Per Shot: ", xg_per_shot)))+
+  geom_label(data = player_summary_1, size=4, fill = primary_col, aes(x=65, y=20, label = paste0("Total Shots: ", total_shots)))+
+  geom_label(data = player_summary_1, size=4, fill = primary_col, aes(x=58.5, y=20, label = paste0("Total Goals: ", total_goals)))+
+  geom_label(data = player_summary_1, size=4, fill = primary_col, aes(x=65, y=80, label = paste0("Total xG: ", total_xg)))+
+  geom_label(data = player_summary_1, size=4, fill = primary_col, aes(x=58.5, y=80, label = paste0("xG Per Shot: ", xg_per_shot)))+
   facet_wrap(~league_year) +
   
   theme(plot.title = element_text(size = 30, face = "bold", hjust = 0.5),
