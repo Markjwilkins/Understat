@@ -6,10 +6,7 @@ library(ggrepel)
 ##pull available leagues
 leagues<-get_leagues_meta()
 
-leagues
-
 unique(leagues$league_name)
-
 
 ##remove RFPL to leave top 5 European leagues
 leagues<-leagues%>%
@@ -55,8 +52,10 @@ shot_data <- players %>%
 shots_data_2020<-shot_data %>% 
   filter(year == 2020)
 
+##save 2020 shot data
 write_csv(shots_data_2020, here("shots_data_2020.csv"))
 
+##plot Lewandowski non-penalty shots
 shots_data_2020 %>% 
   filter(player=="Robert Lewandowski",
          !situation=="Penalty") %>% 
