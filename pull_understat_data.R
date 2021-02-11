@@ -2,6 +2,7 @@ library(tidyverse)
 library(understatr)
 library(here) ##for saving output - more stable than set_wd()
 library(ggrepel)
+library(ggsoccer)
 
 ##pull available leagues
 leagues<-get_leagues_meta()
