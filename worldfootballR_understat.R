@@ -1,4 +1,3 @@
-
 ##install worldfootballR
 devtools::install_github("JaseZiv/worldfootballR")
 
