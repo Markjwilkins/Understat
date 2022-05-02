@@ -1,0 +1,38 @@
+---
+title: "Understat Shot Map"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+```
+
+```{r, include=FALSE}
+library(ggshakeR)
+library(tidyverse)
+library(worldfootballR)
+library(shiny)
+```
+
+```{r, include=FALSE}
+data <- read_csv("top5_2021_shots.csv")
+```
+
+```{r}
+inputPanel(
+  selectInput(inputId = "players",
+              label = "Select Player:",
+              choices = sort(unique(data$player)), 
+              selected = "Harry Kane")
+)
+```
+
+
+```{r}
+renderPlot({
+  data %>% 
+    filter(player == input$players) %>% 
+    ggshakeR::plot_shot()
+})
+```
